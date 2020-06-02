@@ -1,0 +1,46 @@
+body {
+    background-color: gray;
+}
+
+header {
+    text-align: center;
+}
+
+.container {
+    display: grid;
+    width: 400px;
+    height: 500px;
+    
+    margin: 0 auto;
+    /*
+    margin-right: 25px;
+    margin-left: 600px;
+    */
+    background-color: black;
+}
+
+.displayScreen {
+    display: grid;
+    background-color: rgb(156, 231, 156);
+    width: 300px;
+    height: 90px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.allButtons {
+    display: grid;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    grid-gap: 5px;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+button {
+    font-size: 20px;
+}
+
+.equalB{
+    width: 300px;
+}
