@@ -56,12 +56,33 @@ let charCount;
 let digitsStrA;
 let digitsStrB;
 let i;
+
+let zeroChar = "0";
 //let index;  //***not same as count , actually not needed*/
 //split but keep each delimiter as one element in the array
 function mySplit(insertString) {
     charCount = insertString.length;
     console.log("char length: ", charCount);
     console.log("charAt[o]: ", insertString.charAt(0));
+
+    // need check for 2 consecutive decimals OR last char is operator-> display error before while loop
+    // if match -> return 
+    if (insertString.includes("..")){
+        console.log(strArr);
+        console.log("error: consecutive ..");
+        strArr = "error: consecutive ..  "; //** note strArr[] changed to  a string */
+        //displayAnswer.innerHTML = " asdf ";  is already called after serchLoop is called
+        console.log("strArr ", strArr);
+        return;
+    }
+
+    if (isNaN(insertString.charAt(charCount-1))){
+        console.log("error: operator in last ");
+        strArr = "error: operator in last ";
+        //displayAnswer.innerHTML = strArr;
+        console.log(strArr);
+        return;
+    }
 
     count = 0;
     while (count < charCount) {
@@ -96,14 +117,37 @@ function mySplit(insertString) {
             }  
             //  3 . ->  3.
             else if (insertString.charAt(count) == ".") {
-                console.log("decmial FOUND");
-                digitsStrA = strArr.pop(); //record last elem in arr and destroy it
-                digitsStrB = insertString.charAt(count);
-                console.log("check  digitsStrA digitsStrB", digitsStrA, digitsStrB);
-                digitsStrA += digitsStrB;
+                // if     __ .4  ->  0.4       // 12 +  .4   -> 12 + 0.4
+                if (count == 0){
+                    console.log("first char is a decimal");
+                    digitsStrA = zeroChar;
+                    digitsStrB = insertString.charAt(count); 
 
-                strArr.push(digitsStrA);
-                console.log("after [num '.' concat ] ", strArr);
+                    digitsStrA += digitsStrB;
+                    strArr.push(digitsStrA);
+                    console.log("after ['.' num ] ", strArr);
+
+                }
+               
+                else if (  isNaN(insertString.charAt(count-1) )){
+                    console.log(" int starts with a decmila");
+                    digitsStrA = zeroChar;
+                    digitsStrB = insertString.charAt(count); 
+
+                    digitsStrA += digitsStrB;
+                    strArr.push(digitsStrA);
+                    console.log("after ['op' '.' num ] ", strArr);
+                }
+                else {
+                    console.log("decmial FOUND");
+                    digitsStrA = strArr.pop(); //record last elem in arr and destroy it
+                    digitsStrB = insertString.charAt(count);
+                    console.log("check  digitsStrA digitsStrB", digitsStrA, digitsStrB);
+                    digitsStrA += digitsStrB;
+
+                    strArr.push(digitsStrA);
+                    console.log("after [num '.' concat ] ", strArr);
+                }
             }  
             // next element
             else {
