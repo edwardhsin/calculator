@@ -28,6 +28,14 @@ operator.forEach((operator) => {
     });
 });
 
+const backspace = document.querySelector(".backspace");
+backspace.addEventListener('click', (e) =>{ 
+    console.log("you pressed backspace...");
+    displayInput.innerHTML = displayInput.innerHTML.slice(0, -1); 
+    console.log(displayInput.innerHTML);
+
+});
+
 let inputString = '';
 let regex = " ";
 let strArr = [];
